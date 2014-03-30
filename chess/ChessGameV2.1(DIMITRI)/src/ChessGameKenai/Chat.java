@@ -310,7 +310,7 @@ public class Chat extends JPanel {
         int returnVal = saveDialog.showDialog(null, "save");
 
         // Check whether user canceled the save
-        if (returnVal != JFileChooser.APPROVE_OPTION) {
+      if (returnVal != JFileChooser.APPROVE_OPTION) {
             return;
         } else {
             File file = saveDialog.getSelectedFile();
