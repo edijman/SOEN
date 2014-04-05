@@ -42,7 +42,7 @@ public final class Board extends JPanel implements Observer {
     private boolean isWhite = true;
     private ArrayList<Square> squares;
     private HashMap<String, String> imageMap = new HashMap<String, String>();
-    private ChessData data;
+    private Chess_Data data;
     private ArrayList<VisualPiece> pieces = new ArrayList<VisualPiece>();
     private boolean isFirstTime = true;
     private ChessBoardView view;
@@ -59,7 +59,7 @@ public final class Board extends JPanel implements Observer {
      * @param data as Chess_Data
      * @param view as ChessBoardView
      */
-    public Board(ChessData data, ChessBoardView view) {
+    public Board(Chess_Data data, ChessBoardView view) {
         this.setLayout(null);
         squares = new ArrayList<Square>();
         this.data = data;
@@ -100,7 +100,7 @@ public final class Board extends JPanel implements Observer {
     public void populateBoard() {
         for (int i = 0; i < data.getActivePieces().size(); i++) {
             if (data.getActivePieces().get(i) != null) {
-                NonVisualPiece p = data.getActivePieces().get(i);
+                Non_Visual_Piece p = data.getActivePieces().get(i);
                 if (p.getType().equals("WKing")) {
                     pieces.add(new VisualPiece(this, p, "King", Color.WHITE, p.getPosition(), imageMap.get("WKing")));
                 } else if (p.getType().equals("BKing")) {
@@ -176,6 +176,7 @@ public final class Board extends JPanel implements Observer {
     public void setSquares() {
         int y = 0;
         int p = 0;
+
         //CONSTRUCT SQUARE OBJECTS
         for (int i = 0; i < 64; i++) {
             p = i;
@@ -188,6 +189,7 @@ public final class Board extends JPanel implements Observer {
             if ((i) % 8 == 0) {
                 p = 0;
             }
+
             if (isWhite) {
                 squares.add(new Square(Color.WHITE, (i + 1)));
                 squares.get(i).setBackground(Color.WHITE);
@@ -353,24 +355,31 @@ public final class Board extends JPanel implements Observer {
             isFirstTime = false;
         }
         if (arg != null) {
-            ArrayList list = (ArrayList) arg;
-            String turn = "";
-            if (squares.get((Integer) list.get(1) - 1).getComponentCount() > 0) {
-                Piece p = ((Piece) squares.get((Integer) list.get(1) - 1).getComponent(0));
-                if (p.getColor() == Color.WHITE) {
-                    turn = "W" + p.getType();
-                } else {
-                    turn = "B" + p.getType();
-                }
-            }
-            view.getMoves().append(turn + " from: " + mapPositions.get(list.get(0)) + " to " + mapPositions.get(list.get(1)) + "\n");
-            view.getMoves().append("--------------------------\n");
-            view.getMoves().setCaretPosition(view.getMoves().getDocument().getLength());
+            squareposition(arg);
         }
         this.removeCapturedPieces();
         this.revalidate();
         this.repaint();
     }
+
+	/**
+	 * @param arg record the moves made by the data class and display on the view
+	 */
+	public void squareposition(Object arg) {
+		ArrayList list = (ArrayList) arg;
+		String turn = "";
+		if (squares.get((Integer) list.get(1) - 1).getComponentCount() > 0) {
+		    VisualPiece p = ((VisualPiece) squares.get((Integer) list.get(1) - 1).getComponent(0));
+		    if (p.getColor() == Color.WHITE) {
+		        turn = "W" + p.getType();
+		    } else {
+		        turn = "B" + p.getType();
+		    }
+		}
+		view.getMoves().append(turn + " from: " + mapPositions.get(list.get(0)) + " to " + mapPositions.get(list.get(1)) + "\n");
+		view.getMoves().append("--------------------------\n");
+		view.getMoves().setCaretPosition(view.getMoves().getDocument().getLength());
+	}
 
     /**
      * The method isFirstTime simply sets the boolean value to true or false
@@ -393,11 +402,11 @@ public final class Board extends JPanel implements Observer {
     public void redrawPieces() {
         for (int i = 0; i < data.getActivePieces().size(); i++) {
             if (data.getActivePieces().get(i) != null) {
-                NonVisualPiece p = data.getActivePieces().get(i);
+                Non_Visual_Piece p = data.getActivePieces().get(i);
                 for (int j = 0; j < pieces.size(); j++) {
                     VisualPiece peice = pieces.get(j);
                     if (p.isQueenFromPawn() && peice.getPosition() == p.getPreviousPosition()) {
-                        Piece pi = (Piece) squares.get(p.getPreviousPosition() - 1).getComponent(0);
+                        VisualPiece pi = (VisualPiece) squares.get(p.getPreviousPosition() - 1).getComponent(0);
                         pieces.remove(pi);
                         squares.get(p.getPreviousPosition() - 1).remove(0);
                         VisualPiece piece = new VisualPiece(this, p, "Queen", p.getColor(), p.getPosition(), imageMap.get(p.getType()));
@@ -410,7 +419,7 @@ public final class Board extends JPanel implements Observer {
                         p.isQueenFromPawn(false);
                     } else {
                         if (p.getColor() == peice.getColor() && p.getPieceType().equals(peice.getType()) && p.getPreviousPosition() == peice.getPosition()) {
-                            getSquares().get(p.getPosition() - 1).add((Piece) peice);
+                            getSquares().get(p.getPosition() - 1).add((VisualPiece) peice);
                             peice.setPosition(p.getPosition());
                         }
                         if (p.getPreviousPosition() > 0) {
@@ -435,7 +444,7 @@ public final class Board extends JPanel implements Observer {
      */
     public void removeCapturedPieces() {
         if (!data.getCapturedPieces().isEmpty()) {
-            Piece p = (Piece) data.getCapturedPieces().get(data.getCapturedPieces().size() - 1);
+            Non_Visual_Piece p = (Non_Visual_Piece) data.getCapturedPieces().get(data.getCapturedPieces().size() - 1);
             for (int i = 0; i < pieces.size(); i++) {
                 if (pieces.get(i).getPiece().equals(p)) {
                     pieces.remove(pieces.get(i));

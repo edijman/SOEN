@@ -32,10 +32,14 @@ import javax.swing.JPanel;
  * @see JPanel
  * @version 1.5
  */
-public class VisualPiece extends Piece {
+public class VisualPiece extends JPanel {
 
+    private Color color;
+    private int position;
+    private int clickCount = 0;
     private String imagePath;
-    private NonVisualPiece piece;
+    private String type;
+    private Non_Visual_Piece piece;
     private MouseListener listener;
     private Board board;
 
@@ -59,7 +63,7 @@ public class VisualPiece extends Piece {
      * @param position as an integer
      * @param imagePath as a String
      */
-    public VisualPiece(Board board, NonVisualPiece piece, String type, Color color, int position, String imagePath) {
+    public VisualPiece(Board board, Non_Visual_Piece piece, String type, Color color, int position, String imagePath) {
         this.position = position;
         this.board = board;
         this.color = color;
@@ -113,8 +117,48 @@ public class VisualPiece extends Piece {
      * The method getPiece returns the non visual piece that represents this object
      * @return piece as Non_Visual_Piece
      */
-    public Piece getPiece() {
+    public Non_Visual_Piece getPiece() {
         return piece;
+    }
+
+    /**
+     * The method getColor returns color of the object
+     * @return color
+     */
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * The method setColor sets Color
+     * @param color sets Color of the object
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     * The method getPosition returns Position
+     * @return position of the object
+     */
+    public int getPosition() {
+        return position;
+    }
+
+    /**
+     * The method setPosition sets object's position
+     * @param position position of the object
+     */
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    /**
+     * The method getType returns type as a String
+     * @return the type of object
+     */
+    public String getType() {
+        return type;
     }
 
     /**
@@ -127,6 +171,23 @@ public class VisualPiece extends Piece {
         } else {
             return "Black";
         }
+    }
+
+    /**
+     * The method setClickCount sets clickCount
+     * @param clickCount sets clicks for the object
+     */
+    public void setClickCount(int clickCount) {
+        this.clickCount = clickCount;
+    }
+
+    /**
+     * The method getClickCount returns the click count on the current object
+     * This method is needed to check if the piece was clicked or not
+     * @return clickCount as an integer
+     */
+    public int getClickCount() {
+        return clickCount;
     }
 
     /**

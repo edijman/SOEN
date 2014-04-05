@@ -110,7 +110,7 @@ public class StartUpWindow extends JWindow implements Runnable {
             new Thread(new Runnable() {
 
                 public void run() {
-                    new StartGame();
+                    new Start_Game();
                 }
             }).start();
         }

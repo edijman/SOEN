@@ -45,7 +45,7 @@ public class ConnectionBridge implements Observer {
     private InetAddress ipAddress;
     private ChessBoardView view;
     private ReadData readData;
-    private ChessData data;
+    private Chess_Data data;
     private Color color = Color.ORANGE;
     private SimpleAttributeSet smpSet = new SimpleAttributeSet();
     private Chat chat;
@@ -59,7 +59,7 @@ public class ConnectionBridge implements Observer {
      * @param ipAddress as an InetAddress
      * @param chat as a Chat
      */
-    public ConnectionBridge(ChessData data, ChessBoardView view, boolean isServer, InetAddress ipAddress, Chat chat) {
+    public ConnectionBridge(Chess_Data data, ChessBoardView view, boolean isServer, InetAddress ipAddress, Chat chat) {
         this.view = view;
         this.isServer = isServer;
         this.ipAddress = ipAddress;
@@ -179,20 +179,7 @@ public class ConnectionBridge implements Observer {
                 if (packet.getImgPath() != null) {
                     chat.getTxtPane().insertIcon(new ImageIcon(getClass().getResource(((Packet) object).getImgPath())));
                     chat.getTxtPane().setCaretPosition(chat.getTxtPane().getDocument().getLength());
-                }
-                setProperty set=new setProperty();
-                set.setPlayerIconPath(object);
-                if (packet.getPlayerIconPath() != null) {
-                    //ConnectionBridge.this.setPlayerIconPath(object);
-                	set.setPlayerIconPath(object);
-                }
-                if (packet.getGuestName() != null) {
-                    //ConnectionBridge.this.setGuestName(object);
-                    set.setGuestName(object);
-                }
-                if (packet.getRestartGame() != null) {
-                    ConnectionBridge.this.restartGame();
-                }
+                }               
                 if (packet.getConfirmRestart() != null) {
                     view.restartClientGame();
                 }
@@ -245,30 +232,5 @@ public class ConnectionBridge implements Observer {
      * so he would also see that image changed
      * @param object as an Object
      */
-   /* public void setPlayerIconPath(Object object) {
-        Packet packet = (Packet) object;
-        if (data.isServer()) {
-            data.getPlayers().get(1).setImagePath(packet.getPlayerIconPath());
-        } else {
-            data.getPlayers().get(0).setImagePath(packet.getPlayerIconPath());
-        }
-        data.notifyView();
-    }
-
-    /**
-     * The method setGuestName simply sets the guest name
-     * of the player this method is used to update the view of the client
-     * when a client changes his name the name is send to the other client that is connected
-     * so he would also see that name changed
-     * @param object as an Object
-     */
-    /*public void setGuestName(Object object) {
-        Packet packet = (Packet) object;
-        if (data.isServer()) {
-            data.getPlayers().get(1).setName(packet.getGuestName());
-        } else {
-            data.getPlayers().get(0).setName(packet.getGuestName());
-        }
-        data.notifyView();
-    }*/
+   
 }

@@ -22,13 +22,13 @@ import javax.swing.JOptionPane;
  * @see ArrayList object
  * @version 1.1
  */
-public final class ChessData extends Observable {
+public final class Chess_Data extends Observable {
 
-    private ArrayList<NonVisualPiece> capturedPieces = new ArrayList<NonVisualPiece>();
+    private ArrayList<Non_Visual_Piece> capturedPieces = new ArrayList<Non_Visual_Piece>();
     private ArrayList<Player> players = new ArrayList<Player>();
     private ArrayList<Player> loadedPlayer = new ArrayList<Player>();
     private int counter = 0;
-    private ArrayList<NonVisualPiece> activePieces = new ArrayList<NonVisualPiece>();
+    private ArrayList<Non_Visual_Piece> activePieces = new ArrayList<Non_Visual_Piece>();
     private boolean isWhiteTurn = true;
     private boolean isServer = true;
     private boolean isGameOnLine = false;
@@ -39,7 +39,7 @@ public final class ChessData extends Observable {
      * it will contain the information that is specified inside
      * the constructor the constructor creates the non visual pieces and fills the array with them
      */
-    public ChessData() {
+    public Chess_Data() {
         this.createNonVisualPieces();
     }
 
@@ -55,40 +55,40 @@ public final class ChessData extends Observable {
         //FILL NON VISUAL PIECES INTO THE ARRAY LIST OF THE DATA CLASS
         for (int i = 0; i < 64; i++) {
             if (i == 0 || i == 7) {
-                activePieces.add(new NonVisualPiece(this, "BRook", (i + 1), Color.BLACK));
+                activePieces.add(new Non_Visual_Piece(this, "BRook", (i + 1), Color.BLACK));
             }
             if (i == 1 || i == 6) {
-                activePieces.add(new NonVisualPiece(this, "BKnight", (i + 1), Color.BLACK));
+                activePieces.add(new Non_Visual_Piece(this, "BKnight", (i + 1), Color.BLACK));
             }
             if (i == 2 || i == 5) {
-                activePieces.add(new NonVisualPiece(this, "BBishop", (i + 1), Color.BLACK));
+                activePieces.add(new Non_Visual_Piece(this, "BBishop", (i + 1), Color.BLACK));
             }
             if (i == 3) {
-                activePieces.add(new NonVisualPiece(this, "BQueen", (i + 1), Color.BLACK));
+                activePieces.add(new Non_Visual_Piece(this, "BQueen", (i + 1), Color.BLACK));
             }
             if (i == 4) {
-                activePieces.add(new NonVisualPiece(this, "BKing", (i + 1), Color.BLACK));
+                activePieces.add(new Non_Visual_Piece(this, "BKing", (i + 1), Color.BLACK));
             }
             if (i > 7 && i < 16) {
-                activePieces.add(new NonVisualPiece(this, "BPawn", (i + 1), Color.BLACK));
+                activePieces.add(new Non_Visual_Piece(this, "BPawn", (i + 1), Color.BLACK));
             }
             if (i > 47 && i < 56) {
-                activePieces.add(new NonVisualPiece(this, "WPawn", (i + 1), Color.WHITE));
+                activePieces.add(new Non_Visual_Piece(this, "WPawn", (i + 1), Color.WHITE));
             }
             if (i == 56 || i == 63) {
-                activePieces.add(new NonVisualPiece(this, "WRook", (i + 1), Color.WHITE));
+                activePieces.add(new Non_Visual_Piece(this, "WRook", (i + 1), Color.WHITE));
             }
             if (i == 57 || i == 62) {
-                activePieces.add(new NonVisualPiece(this, "WKnight", (i + 1), Color.WHITE));
+                activePieces.add(new Non_Visual_Piece(this, "WKnight", (i + 1), Color.WHITE));
             }
             if (i == 58 || i == 61) {
-                activePieces.add(new NonVisualPiece(this, "WBishop", (i + 1), Color.WHITE));
+                activePieces.add(new Non_Visual_Piece(this, "WBishop", (i + 1), Color.WHITE));
             }
             if (i == 59) {
-                activePieces.add(new NonVisualPiece(this, "WQueen", (i + 1), Color.WHITE));
+                activePieces.add(new Non_Visual_Piece(this, "WQueen", (i + 1), Color.WHITE));
             }
             if (i == 60) {
-                activePieces.add(new NonVisualPiece(this, "WKing", (i + 1), Color.WHITE));
+                activePieces.add(new Non_Visual_Piece(this, "WKing", (i + 1), Color.WHITE));
             } else if (i > 15 && i < 48) {
                 activePieces.add(null);
             }
@@ -157,7 +157,7 @@ public final class ChessData extends Observable {
      * non visual pieces to the caller
      * @return activePieces as an ArrayList
      */
-    public ArrayList<NonVisualPiece> getActivePieces() {
+    public ArrayList<Non_Visual_Piece> getActivePieces() {
         return activePieces;
     }
 
@@ -165,7 +165,7 @@ public final class ChessData extends Observable {
      * The method setActivePieces simply sets the active pieces
      * @param activePieces as an ArrayList
      */
-    public void setActivePieces(ArrayList<NonVisualPiece> activePieces) {
+    public void setActivePieces(ArrayList<Non_Visual_Piece> activePieces) {
         this.activePieces = activePieces;
         this.setChanged();
         this.notifyObservers();
@@ -330,29 +330,29 @@ public final class ChessData extends Observable {
         for (int i = 0; i < activePieces.size(); i++) {
             if (activePieces.get(i) != null) {
                 if (activePieces.get(i).getType().equals("WKing")) {
-                    activePieces.set(i, new NonVisualPiece(this, "WKing", (i + 1), Color.WHITE));
+                    activePieces.set(i, new Non_Visual_Piece(this, "WKing", (i + 1), Color.WHITE));
                 } else if (activePieces.get(i).getType().equals("BKing")) {
-                    activePieces.set(i, new NonVisualPiece(this, "BKing", (i + 1), Color.BLACK));
+                    activePieces.set(i, new Non_Visual_Piece(this, "BKing", (i + 1), Color.BLACK));
                 } else if (activePieces.get(i).getType().equals("BQueen")) {
-                    activePieces.set(i, new NonVisualPiece(this, "BQueen", (i + 1), Color.BLACK));
+                    activePieces.set(i, new Non_Visual_Piece(this, "BQueen", (i + 1), Color.BLACK));
                 } else if (activePieces.get(i).getType().equals("WQueen")) {
-                    activePieces.set(i, new NonVisualPiece(this, "WQueen", (i + 1), Color.WHITE));
+                    activePieces.set(i, new Non_Visual_Piece(this, "WQueen", (i + 1), Color.WHITE));
                 } else if (activePieces.get(i).getType().equals("WBishop")) {
-                    activePieces.set(i, new NonVisualPiece(this, "WBishop", (i + 1), Color.WHITE));
+                    activePieces.set(i, new Non_Visual_Piece(this, "WBishop", (i + 1), Color.WHITE));
                 } else if (activePieces.get(i).getType().equals("BBishop")) {
-                    activePieces.set(i, new NonVisualPiece(this, "BBishop", (i + 1), Color.BLACK));
+                    activePieces.set(i, new Non_Visual_Piece(this, "BBishop", (i + 1), Color.BLACK));
                 } else if (activePieces.get(i).getType().equals("WKnight")) {
-                    activePieces.set(i, new NonVisualPiece(this, "WKnight", (i + 1), Color.WHITE));
+                    activePieces.set(i, new Non_Visual_Piece(this, "WKnight", (i + 1), Color.WHITE));
                 } else if (activePieces.get(i).getType().equals("BKnight")) {
-                    activePieces.set(i, new NonVisualPiece(this, "BKnight", (i + 1), Color.BLACK));
+                    activePieces.set(i, new Non_Visual_Piece(this, "BKnight", (i + 1), Color.BLACK));
                 } else if (activePieces.get(i).getType().equals("WRook")) {
-                    activePieces.set(i, new NonVisualPiece(this, "WRook", (i + 1), Color.WHITE));
+                    activePieces.set(i, new Non_Visual_Piece(this, "WRook", (i + 1), Color.WHITE));
                 } else if (activePieces.get(i).getType().equals("BRook")) {
-                    activePieces.set(i, new NonVisualPiece(this, "BRook", (i + 1), Color.BLACK));
+                    activePieces.set(i, new Non_Visual_Piece(this, "BRook", (i + 1), Color.BLACK));
                 } else if (activePieces.get(i).getType().equals("WPawn")) {
-                    activePieces.set(i, new NonVisualPiece(this, "WPawn", (i + 1), Color.WHITE));
+                    activePieces.set(i, new Non_Visual_Piece(this, "WPawn", (i + 1), Color.WHITE));
                 } else if (activePieces.get(i).getType().equals("BPawn")) {
-                    activePieces.set(i, new NonVisualPiece(this, "BPawn", (i + 1), Color.BLACK));
+                    activePieces.set(i, new Non_Visual_Piece(this, "BPawn", (i + 1), Color.BLACK));
                 }
             }
         }
@@ -364,7 +364,7 @@ public final class ChessData extends Observable {
      */
     public boolean isWinner() {
         for (int i = 0; i < capturedPieces.size(); i++) {
-            Piece p = capturedPieces.get(i);
+            Non_Visual_Piece p = capturedPieces.get(i);
             if (p.getPieceType().equals("King")) {
                 return true;
             }
@@ -376,7 +376,7 @@ public final class ChessData extends Observable {
      * The method getCapturedPieces simply returns the ArrayList when called upon
      * @return ArrayList<Piece>
      */
-    public synchronized ArrayList<NonVisualPiece> getCapturedPieces() {
+    public synchronized ArrayList<Non_Visual_Piece> getCapturedPieces() {
         return capturedPieces;
     }
 
@@ -384,7 +384,7 @@ public final class ChessData extends Observable {
      * The method setCapturedPieces sets ArrayList<Piece>
      * @param capturedPieces ArrayList<Piece>
      */
-    public void setCapturedPieces(ArrayList<NonVisualPiece> capturedPieces) {
+    public void setCapturedPieces(ArrayList<Non_Visual_Piece> capturedPieces) {
 
         //ASSIGN LOCAL CAPTURED PIECES TO INSTANCE VARIABLE
         this.capturedPieces = capturedPieces;
@@ -401,7 +401,7 @@ public final class ChessData extends Observable {
      * @return clicked piece position as an integer
      */
     public int getPiecePosition() {
-        Piece p;
+        Non_Visual_Piece p;
         for (int i = 0; i < activePieces.size(); i++) {
             if (activePieces.get(i) != null) {
                 p = activePieces.get(i);
@@ -427,7 +427,7 @@ public final class ChessData extends Observable {
      * @return true if the piece can be moved false otherwise
      */
     public boolean isMoveable(int x, int y) {
-        NonVisualPiece p = activePieces.get(x - 1);
+        Non_Visual_Piece p = activePieces.get(x - 1);
 
         //IF PIECE IS KING GO INSIDE THE IF BLOCK
         if (p.getPieceType().equals("King")) {
@@ -460,7 +460,7 @@ public final class ChessData extends Observable {
                                     if (counter == 0) {
                                         for (int i = 0; i < activePieces.size(); i++) {
                                             if (activePieces.get(i) != null) {
-                                                Piece pi = activePieces.get(i);
+                                                Non_Visual_Piece pi = activePieces.get(i);
                                                 if (pi.getColor() != p.getColor()) {
                                                     if (this.isMoveable(pi.getPosition(), 63) || this.isMoveable(pi.getPosition(), 62)) {
                                                         counter++;
@@ -494,7 +494,7 @@ public final class ChessData extends Observable {
                                         if (counter == 0) {
                                             for (int i = 0; i < activePieces.size(); i++) {
                                                 if (activePieces.get(i) != null) {
-                                                    Piece pi = activePieces.get(i);
+                                                    Non_Visual_Piece pi = activePieces.get(i);
                                                     if (pi.getColor() != p.getColor()) {
                                                         if (this.isMoveable(pi.getPosition(), 59) || this.isMoveable(pi.getPosition(), 58)) {
                                                             counter++;
@@ -528,7 +528,7 @@ public final class ChessData extends Observable {
                                     if (counter == 0) {
                                         for (int i = 0; i < activePieces.size(); i++) {
                                             if (activePieces.get(i) != null) {
-                                                Piece pi = activePieces.get(i);
+                                                Non_Visual_Piece pi = activePieces.get(i);
                                                 if (pi.getColor() != p.getColor()) {
                                                     if (this.isMoveable(pi.getPosition(), 6) || this.isMoveable(pi.getPosition(), 7)) {
                                                         counter++;
@@ -562,7 +562,7 @@ public final class ChessData extends Observable {
                                         if (counter == 0) {
                                             for (int i = 0; i < activePieces.size(); i++) {
                                                 if (activePieces.get(i) != null) {
-                                                    Piece pi = activePieces.get(i);
+                                                    Non_Visual_Piece pi = activePieces.get(i);
                                                     if (pi.getColor() != p.getColor()) {
                                                         if (this.isMoveable(pi.getPosition(), 2) || this.isMoveable(pi.getPosition(), 3)) {
                                                             counter++;
@@ -3336,7 +3336,7 @@ public final class ChessData extends Observable {
 
         //BEFORE MOVING FIRST CHECK IF THE PIECE IS MOVEABLE
         if (this.isMoveable(x, y)) {
-            NonVisualPiece p = activePieces.get(x - 1);
+            Non_Visual_Piece p = activePieces.get(x - 1);
 
             //IF KING EXECUTE THE IF BLOCK AND CHECK THE FOLLOWING CONDITIONS
             if (p.getPieceType().equals("King")) {
@@ -3509,7 +3509,7 @@ public final class ChessData extends Observable {
                         capturedPieces.add(activePieces.get(y - 1));
                         activePieces.set((y - 1), null);
                     }
-                    activePieces.set((y - 1), new NonVisualPiece(this, "WQueen", y, Color.WHITE));
+                    activePieces.set((y - 1), new Non_Visual_Piece(this, "WQueen", y, Color.WHITE));
                     activePieces.get(y - 1).setPreviousPosition(x);
                     activePieces.set((x - 1), null);
                     activePieces.get(y - 1).isQueenFromPawn(true);
@@ -3522,7 +3522,7 @@ public final class ChessData extends Observable {
                         capturedPieces.add(activePieces.get(y - 1));
                         activePieces.set((y - 1), null);
                     }
-                    activePieces.set((y - 1), new NonVisualPiece(this, "BQueen", y, Color.BLACK));
+                    activePieces.set((y - 1), new Non_Visual_Piece(this, "BQueen", y, Color.BLACK));
                     activePieces.get(y - 1).setPreviousPosition(x);
                     activePieces.set((x - 1), null);
                     activePieces.get(y - 1).isQueenFromPawn(true);
