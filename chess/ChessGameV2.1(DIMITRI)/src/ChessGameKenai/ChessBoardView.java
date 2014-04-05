@@ -33,7 +33,7 @@ public class ChessBoardView extends JFrame implements Observer {
 
     private Container container;
     private JComponent mainPanel, northPanel, pl1IconPanel, pl2IconPanel, pl1PropetiesPanel, pl2PropetiesPanel;
-    private ChessData data;
+    private Chess_Data data;
     private CostumPanel mainNorthPanel, mainEastPanel, eastPanel3, eastPanel2;
     private JMenuBar menuBar;
     private JMenu fileMenu, helpMenu, optionsMenu;
@@ -65,7 +65,7 @@ public class ChessBoardView extends JFrame implements Observer {
      * for later communication with the object
      * @param data address of the Chess_Data object
      */
-    public ChessBoardView(ChessData data) {
+    public ChessBoardView(Chess_Data data) {
         this.data = data;
         this.setLayout(null);
         this.container = this.getContentPane();
@@ -355,7 +355,7 @@ public class ChessBoardView extends JFrame implements Observer {
                         EventQueue.invokeLater(new Runnable() {
 
                             public void run() {
-                                new StartGame();
+                                new Start_Game();
                             }
                         });
                     }
@@ -364,7 +364,7 @@ public class ChessBoardView extends JFrame implements Observer {
                     EventQueue.invokeLater(new Runnable() {
 
                         public void run() {
-                            new StartGame();
+                            new Start_Game();
                         }
                     });
                 }
