@@ -8,8 +8,10 @@ package ChessGameKenai;
 
 import java.awt.Color;
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -32,6 +34,8 @@ public final class Chess_Data extends Observable {
     private boolean isWhiteTurn = true;
     private boolean isServer = true;
     private boolean isGameOnLine = false;
+	public DateFormat format = new SimpleDateFormat("MM/dd/yy");
+	public Date dateNow = new Date();
 
     /**
      * Empty Constructor of the Chess_Data Class
