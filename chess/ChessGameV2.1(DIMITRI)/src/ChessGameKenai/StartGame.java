@@ -28,7 +28,7 @@ public class StartGame {
     public StartGame() {
 
         //CONSTRUCT THE MODEL OBJECT
-        ChessData data = new ChessData();
+        Chess_Data data = new Chess_Data();
 
         //CONSTRUCT THE MAIN VIEW WHICH IS ALSO A CONTROLLER
         ChessBoardView cbv = new ChessBoardView(data);
